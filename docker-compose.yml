@@ -1,0 +1,47 @@
+services:
+  db:
+    image: mysql:8.0
+    container_name: loomsql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_DATABASE: loombase
+      MYSQL_USER: loomuser
+      MYSQL_PASSWORD: loompass
+    ports:
+      - 3306:3306
+    volumes:
+      - mysql_data:/var/lib/mysql 
+
+  backend:
+    build:
+      context: ./backend   # project root
+      dockerfile: Dockerfile
+    volumes:
+      - ./backend:/usr/src/app   # Mount host folder into container
+      - /usr/src/app/node_modules 
+    container_name: loombackend
+    restart: always
+    ports:
+      - 8000:8000
+    environment:
+      DATABASE_HOST: db
+      DATABASE_PORT: 3306
+      DATABASE_NAME: loombase
+      DATABASE_USER: loomuser
+      DATABASE_PASSWORD: loompass
+    depends_on:
+      - db
+
+  redis:
+    image: redis:7-alpine
+    container_name: redis
+    ports:
+      - "6379:6379"
+    command: ["redis-server", "--appendonly", "yes"]
+    volumes:
+      - redis_data:/data
+
+volumes:
+  mysql_data: {}
+  redis_data: {}
