@@ -6,7 +6,6 @@ import { ConfigModule } from '@nestjs/config';
 import { APP_GUARD } from '@nestjs/core';
 import { SessionAuthGuard } from './common/guards/session.guard';
 import { ApiModule } from './api/api.module';
-import { FrontendModule } from './frontend/frontend.module';
 import { SessionModule } from './common/modules/session/session.module';
 
 @Module({
@@ -24,7 +23,6 @@ import { SessionModule } from './common/modules/session/session.module';
     LoggerModule,
     ApiModule,
     SessionModule,
-    FrontendModule
   ],
   controllers: [],
   providers: [

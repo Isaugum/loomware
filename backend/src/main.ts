@@ -4,7 +4,6 @@ import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';
 import { HttpExceptionFilter } from './common/filters/http-exception/http-exception.filter';
 import { RedisService } from './common/providers/redis.provider';
 import { NestExpressApplication } from '@nestjs/platform-express';
-import { join } from 'path';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
@@ -18,9 +17,6 @@ async function bootstrap() {
 
   const redisService = app.get(RedisService);
   await redisService.client.connect();
-
-  app.setBaseViewsDir(join('src', 'frontend', 'views'));
-  app.setViewEngine('hbs');
 
   await app.listen(process.env.PORT ?? 8000, '0.0.0.0');
 }
