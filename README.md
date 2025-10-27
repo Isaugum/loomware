@@ -8,7 +8,17 @@ This repository contains a **full-stack application** using:
 - **Redis 7** – Caching/session store  
 - **Nginx** – Reverse proxy for single-domain routing  
 
-Everything is containerized with **Docker** and orchestrated with **docker-compose**.
+Everything is containerized with **Docker** and orchestrated with **docker-compose**.  
+
+---
+
+## Getting started
+
+To run the project locally, simply run **make init** in root of the project. Makefile will take care of everything else:
+- Copy .env.example to .env, with default values
+- Build the docker container and run it
+- Default entry point for the app is http://localhost for **frontend** and http://localhost/api for **backend**
+
 ---
 
 ## Features

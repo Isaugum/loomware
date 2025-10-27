@@ -5,9 +5,24 @@ BACKEND_CONTAINER=loombackend
 FRONTEND_CONTAINER=loomfrontend
 DOCKER_COMPOSE=docker-compose
 
+
+# ================================
+# Init environment files with all keys
+# ================================
+init-env:
+	@echo "Creating backend .env from template..."
+	@[ -f backend/.env ] || cp backend/.env.example backend/.env
+	@echo "Creating frontend .env.local from template..."
+	@[ -f frontend/.env ] || cp frontend/.env.example frontend/.env
+	@echo "Environment files created. Please fill in any required values."
+
 # ================================
 # General commands
 # ================================
+init:
+	${MAKE} init-env
+	$(DOCKER_COMPOSE) up --build -d
+
 up:
 	$(DOCKER_COMPOSE) up --build -d
 
