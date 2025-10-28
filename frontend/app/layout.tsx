@@ -1,4 +1,4 @@
-import '../src/scss/global.scss';
+import '@styles/global.scss';
 
 export default function DashboardLayout({
     children,

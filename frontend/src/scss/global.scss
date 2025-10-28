@@ -1,12 +1,2 @@
 @use 'theme';
-
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-@layer base {
-    body {
-        color: var(--color-text);
-        background-color: var(--color-bg);
-    }
-}
+@use 'tailwindcss';
