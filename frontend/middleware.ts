@@ -1,13 +1,12 @@
 import { Endpoints } from '@/core/enums/endpoints.enum';
+import publicRoutes from '@/core/utils/publicRoutes';
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
 export function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
-  const publicPaths = [String(Endpoints.SIGN_IN), String(Endpoints.SIGN_UP)];
-
-  if (!publicPaths.includes(pathname)) {
+  if (!publicRoutes.includes(pathname)) {
     const session = req.cookies.get('session')?.value;
 
     if (!session) {
