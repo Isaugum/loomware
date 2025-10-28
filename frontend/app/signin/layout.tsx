@@ -6,10 +6,8 @@ export default function DashboardLayout({
     children: React.ReactNode
   }) {
     return (
-      <html lang="en" data-theme="dark">
-        <body>
-          <main>{children}</main>
-        </body>
-      </html>
+      <div className='bg-red-500 text-text h-screen w-screen overflow-y-auto'>
+        <div>{children}</div>
+      </div>
     )
   }

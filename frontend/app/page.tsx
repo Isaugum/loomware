@@ -1,8 +1,14 @@
+import { Endpoints } from '@/core/enums/endpoints.enum';
+import { cookies } from 'next/headers';
+import { redirect } from 'next/navigation';
 
-export default function Page() {
-    return (
-        <div>
-            <h1>HELLO WORLD HMM?????</h1>
-        </div>
-    )
+export default async function IndexPage() {
+  const cookieStore = await cookies();
+  const session = cookieStore.get('session')?.value;
+
+  if (session) {
+    redirect(Endpoints.DASHBOARD);
+  }
+
+  redirect(Endpoints.SIGN_IN);
 }

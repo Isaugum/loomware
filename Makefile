@@ -95,6 +95,9 @@ frontend-build:
 frontend-dev:
 	cd frontend && npm install && npm run dev
 
+frontend-install:
+	cd frontend && npm install ${PACKAGES}
+
 # ================================
 # Full stack commands
 # ================================
