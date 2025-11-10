@@ -1,4 +1,4 @@
-import { Endpoints } from '@/core/enums/endpoints.enum';
+import { RouteTypes } from '@/core/enums/RouteTypes.enum';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 
@@ -7,8 +7,8 @@ export default async function IndexPage() {
   const session = cookieStore.get('session')?.value;
 
   if (session) {
-    redirect(Endpoints.DASHBOARD);
+    redirect(RouteTypes.DASHBOARD);
   }
 
-  redirect(Endpoints.SIGN_IN);
+  redirect(RouteTypes.SIGN_IN);
 }

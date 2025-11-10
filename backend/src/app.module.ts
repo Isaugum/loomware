@@ -22,7 +22,7 @@ import { SessionModule } from './common/modules/session/session.module';
     ConfigModule.forRoot({ isGlobal: true }),
     LoggerModule,
     ApiModule,
-    SessionModule,
+    SessionModule
   ],
   controllers: [],
   providers: [

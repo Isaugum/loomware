@@ -30,16 +30,21 @@ export class UserService {
     async createUser(email: string, password: string): Promise<Partial<User>> {
       const newUser = this.userRepository.create({ email, password });
       try {
-        await this.userRepository.save(newUser);
+        const savedUser = await this.userRepository.save(newUser);
+
+        if (!savedUser || !savedUser.id) {
+          throw new InternalServerErrorException('Failed to save user: id was not generated');
+        }
 
         return {
-          id: newUser?.id,
-          email: newUser?.email,
-          username: newUser?.username,
-          roles: newUser?.roles
+          id: savedUser.id,
+          email: savedUser.email,
+          username: savedUser.username,
+          roles: savedUser.roles
         }
       } catch (err) {
-        throw new BadRequestException(err);  
+        const errorMessage = err instanceof Error ? err.message : String(err);
+        throw new BadRequestException('Failed to create user: ' + errorMessage);  
       }
     }
 }

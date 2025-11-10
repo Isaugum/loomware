@@ -1,3 +1,3 @@
-import { Endpoints } from "../enums/endpoints.enum"
+import { RouteTypes } from "../enums/RouteTypes.enum"
 
-export default [String(Endpoints.SIGN_IN), String(Endpoints.SIGN_UP)];
+export default [String(RouteTypes.SIGN_IN), String(RouteTypes.SIGN_UP)];

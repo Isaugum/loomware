@@ -1,8 +1,9 @@
+import SigninForm from "@/components/modules/SigninForm/SigninForm";
 
 export default function Page() {
     return (
-        <div>
-            <h1>HELLO SIGNIN</h1>
-        </div>
+        <section className="flex flex-col items-center justify-center h-screen">
+            <SigninForm />
+        </section>
     )
 }

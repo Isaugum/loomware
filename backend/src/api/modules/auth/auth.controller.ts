@@ -1,7 +1,7 @@
 import { Body, Controller, Post, Request, UseGuards } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { LocalGuard } from '../../guards/local.guard';
-import { Public } from '../../decorators/public.decorator';
+import { LocalGuard } from '../../../common/guards/local.guard';
+import { Public } from '../../../common/decorators/public.decorator';
 
 @Controller('auth')
 export class AuthController {
@@ -12,9 +12,9 @@ export class AuthController {
     @Public()
 
     @Post('sign-up')
-    async signUp(@Body() body: { email: string, password: string })
+    async signUp(@Body() body: { email: string, password: string }, @Request() req)
     {
-        return this.authService.signUp(body.email, body.password);
+        return this.authService.signUp(body.email, body.password, req);
     }
 
     ////////////////////////////////////////////////////

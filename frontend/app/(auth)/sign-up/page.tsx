@@ -1,8 +1,9 @@
+import SignupForm from "@/components/modules/SignupForm/SignupForm.";
 
 export default function Page() {
     return (
-        <div>
-            <h1>HELLO SIGNUP</h1>
-        </div>
+        <section className="flex flex-col items-center justify-center h-screen">
+            <SignupForm />
+        </section>
     )
-}   
+}
