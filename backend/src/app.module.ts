@@ -1,12 +1,12 @@
 import { MiddlewareConsumer, Module, RequestMethod } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { LoggerModule } from './common/modules/logger/logger.module';
-import { RequestLoggerMiddleware } from './common/middleware/request-logger/request-logger.middleware';
+import { LoggerModule } from '@common/modules/logger/logger.module';
+import { RequestLoggerMiddleware } from '@common/middleware/request-logger/request-logger.middleware';
 import { ConfigModule } from '@nestjs/config';
 import { APP_GUARD } from '@nestjs/core';
-import { SessionAuthGuard } from './common/guards/session.guard';
-import { ApiModule } from './api/api.module';
-import { SessionModule } from './common/modules/session/session.module';
+import { SessionAuthGuard } from '@common/guards/session.guard';
+import { ApiModule } from '@api/api.module';
+import { SessionModule } from '@common/modules/session/session.module';
 
 @Module({
   imports: [
@@ -22,7 +22,7 @@ import { SessionModule } from './common/modules/session/session.module';
     ConfigModule.forRoot({ isGlobal: true }),
     LoggerModule,
     ApiModule,
-    SessionModule
+    SessionModule,
   ],
   controllers: [],
   providers: [
@@ -32,11 +32,10 @@ import { SessionModule } from './common/modules/session/session.module';
     },
   ],
 })
-
 export class AppModule {
   configure(consumer: MiddlewareConsumer) {
     consumer
       .apply(RequestLoggerMiddleware)
-      .forRoutes({ path: '*', method: RequestMethod.ALL })
+      .forRoutes({ path: '*', method: RequestMethod.ALL });
   }
 }

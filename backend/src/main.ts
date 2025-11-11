@@ -1,9 +1,13 @@
 import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
-import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';
-import { HttpExceptionFilter } from './common/filters/http-exception/http-exception.filter';
-import { RedisService } from './common/providers/redis.provider';
+import { AppModule } from '@app/app.module';
+import {
+  WINSTON_MODULE_NEST_PROVIDER,
+  WINSTON_MODULE_PROVIDER,
+} from 'nest-winston';
+import { HttpExceptionFilter } from '@common/filters/http-exception/http-exception.filter';
+import { RedisService } from '@common/providers/redis.provider';
 import { NestExpressApplication } from '@nestjs/platform-express';
+import type { Logger } from 'winston';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
@@ -12,7 +16,7 @@ async function bootstrap() {
   app.useLogger(app.get(WINSTON_MODULE_NEST_PROVIDER));
 
   // use exceptions logger
-  const logger = app.get(WINSTON_MODULE_NEST_PROVIDER);
+  const logger = app.get<Logger>(WINSTON_MODULE_PROVIDER);
   app.useGlobalFilters(new HttpExceptionFilter(logger));
 
   const redisService = app.get(RedisService);
@@ -20,4 +24,4 @@ async function bootstrap() {
 
   await app.listen(process.env.PORT ?? 8000, '0.0.0.0');
 }
-bootstrap();
+void bootstrap();

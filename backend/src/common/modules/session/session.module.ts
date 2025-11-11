@@ -1,6 +1,6 @@
 import { Module, NestModule, MiddlewareConsumer } from '@nestjs/common';
-import { RedisService } from '../../providers/redis.provider';
-import { createSessionMiddleware } from '../../config/session.config';
+import { RedisService } from '@common/providers/redis.provider';
+import { createSessionMiddleware } from '@common/config/session.config';
 
 @Module({
   providers: [RedisService],
