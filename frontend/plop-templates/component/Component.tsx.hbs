@@ -1,0 +1,9 @@
+import React from 'react'; export type
+{{pascalCase name}}Props = { className?: string; children?: React.ReactNode; };
+export default function
+{{pascalCase name}}({ className, children }:
+{{pascalCase name}}Props) { return (
+<div className="{className}">
+  {children ?? '{{pascalCase name}}'}
+</div>
+); }

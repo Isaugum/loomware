@@ -1,0 +1,11 @@
+import type { Metadata } from 'next';
+
+{{#if title}}
+  export const metadata: Metadata = { title: '{{title}}', };
+{{/if}}
+
+export default function Page() { return (
+<main>
+  <h1>{{#if title}}{{title}}{{else}}Page{{/if}}</h1>
+</main>
+); }

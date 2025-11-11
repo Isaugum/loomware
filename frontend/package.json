@@ -6,7 +6,13 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "plop": "plop",
+    "gen:component": "plop component",
+    "gen:page": "plop page",
+    "gen:layout": "plop layout"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.4",
@@ -25,10 +31,18 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@types/jest": "^29.5.14",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.2.0",
+    "@testing-library/user-event": "^14.5.2",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
+    "next/jest": "16.0.0",
     "eslint": "^9",
     "eslint-config-next": "16.0.0",
     "sass": "^1.93.2",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "typescript": "^5",
+    "plop": "^4.0.1"
   }
 }

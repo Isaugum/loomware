@@ -17,7 +17,7 @@ init-env:
 	@echo "Environment files created. Please fill in any required values."
 
 # ================================
-# General commands
+# General lifecycle
 # ================================
 init:
 	${MAKE} init-env
@@ -34,6 +34,27 @@ logs:
 
 restart:
 	$(DOCKER_COMPOSE) restart
+
+# ================================
+# Install dependencies (local + docker)
+# ================================
+.PHONY: install install-frontend install-backend
+
+install: install-backend install-frontend
+
+install-frontend:
+	@echo "Installing frontend deps locally..."
+	cd frontend && npm ci
+	@echo "Installing frontend deps in container ($(FRONTEND_CONTAINER))..."
+	-@$(DOCKER_COMPOSE) up -d frontend
+	-@docker exec -i $(FRONTEND_CONTAINER) npm ci
+
+install-backend:
+	@echo "Installing backend deps locally..."
+	cd backend && npm ci
+	@echo "Installing backend deps in container ($(BACKEND_CONTAINER))..."
+	-@$(DOCKER_COMPOSE) up -d backend
+	-@docker exec -i $(BACKEND_CONTAINER) npm ci
 
 # ================================
 # Backend commands
@@ -70,21 +91,21 @@ backend-generate-module:
 ifndef NAME
 	$(error NAME is not set. Usage: make backend-generate-module NAME=ModuleName)
 endif
-	docker exec -it $(BACKEND_CONTAINER) npx nest g module $(NAME)
+	docker exec -i $(BACKEND_CONTAINER) npx nest g module $(NAME)
 
 # Generate a controller
 backend-generate-controller:
 ifndef NAME
 	$(error NAME is not set. Usage: make backend-generate-controller NAME=ControllerName)
 endif
-	docker exec -it $(BACKEND_CONTAINER) npx nest g controller $(NAME)
+	docker exec -i $(BACKEND_CONTAINER) npx nest g controller $(NAME)
 
 # Generate a service
 backend-generate-service:
 ifndef NAME
 	$(error NAME is not set. Usage: make backend-generate-service NAME=ServiceName)
 endif
-	docker exec -it $(BACKEND_CONTAINER) npx nest g service $(NAME)
+	docker exec -i $(BACKEND_CONTAINER) npx nest g service $(NAME)
 
 # ================================
 # Frontend commands
@@ -93,10 +114,21 @@ frontend-build:
 	$(DOCKER_COMPOSE) build frontend
 
 frontend-dev:
-	cd frontend && npm install && npm run dev
+	cd frontend && npm run dev
 
 frontend-install:
 	cd frontend && npm install ${PACKAGES}
+
+# --- Frontend scaffolding via Plop ---
+.PHONY: frontend-gen-component frontend-gen-page frontend-gen-layout
+frontend-gen-component:
+	cd frontend && npm run gen:component
+
+frontend-gen-page:
+	cd frontend && npm run gen:page
+
+frontend-gen-layout:
+	cd frontend && npm run gen:layout
 
 # ================================
 # Full stack commands
