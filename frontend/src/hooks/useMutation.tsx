@@ -1,19 +1,19 @@
-'use client'
+'use client';
 
-import { useMutation, UseMutationOptions } from "@tanstack/react-query";
-import { AxiosRequestConfig } from "axios";
-import { request } from "@/core/lib/axios";
+import { useMutation, UseMutationOptions } from '@tanstack/react-query';
+import { AxiosRequestConfig } from 'axios';
+import { request } from '@/core/lib/axios';
 
 export const useRequestMutation = <
   TResponse,
   TVariables = unknown,
   TError = Error,
-  TContext = unknown
+  TContext = unknown,
 >(
   options?: Omit<
     UseMutationOptions<TResponse, TError, AxiosRequestConfig<TVariables>, TContext>,
-    "mutationFn"
-  >
+    'mutationFn'
+  >,
 ) => {
   const mutation = useMutation<TResponse, TError, AxiosRequestConfig<TVariables>, TContext>({
     mutationFn: (config: AxiosRequestConfig<TVariables>) => request<TResponse>(config),
@@ -29,9 +29,9 @@ export const useRequestMutation = <
     data,
     error,
     status,
-    isIdle: status === "idle",
-    isLoading: status === "pending",
-    isSuccess: status === "success",
-    isError: status === "error",
+    isIdle: status === 'idle',
+    isLoading: status === 'pending',
+    isSuccess: status === 'success',
+    isError: status === 'error',
   };
 };
