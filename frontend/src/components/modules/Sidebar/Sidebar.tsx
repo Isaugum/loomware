@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import Link from "next/link";
-import { RouteTypes } from "@/core/enums/RouteTypes.enum";
+import Link from 'next/link';
+import { RouteTypes } from '@/core/enums/RouteTypes.enum';
 
 export default function Sidebar() {
   return (
@@ -12,34 +12,22 @@ export default function Sidebar() {
       <nav className="flex-1 overflow-auto p-2">
         <ul className="space-y-1">
           <li>
-            <Link
-              href={RouteTypes.DASHBOARD}
-              className="block px-3 py-2 rounded hover:bg-gray-100"
-            >
+            <Link href={RouteTypes.DASHBOARD} className="block px-3 py-2 rounded hover:bg-gray-100">
               Dashboard Home
             </Link>
           </li>
           <li>
-            <Link
-              href="#"
-              className="block px-3 py-2 rounded hover:bg-gray-100"
-            >
+            <Link href="#" className="block px-3 py-2 rounded hover:bg-gray-100">
               Projects
             </Link>
           </li>
           <li>
-            <Link
-              href="#"
-              className="block px-3 py-2 rounded hover:bg-gray-100"
-            >
+            <Link href="#" className="block px-3 py-2 rounded hover:bg-gray-100">
               Reports
             </Link>
           </li>
           <li>
-            <Link
-              href="#"
-              className="block px-3 py-2 rounded hover:bg-gray-100"
-            >
+            <Link href="#" className="block px-3 py-2 rounded hover:bg-gray-100">
               Settings
             </Link>
           </li>

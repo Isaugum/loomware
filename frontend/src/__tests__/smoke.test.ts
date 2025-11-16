@@ -1,7 +1,5 @@
 describe('frontend placeholder', () => {
-	it('always passes', () => {
-		expect(true).toBe(true);
-	});
+  it('always passes', () => {
+    expect(true).toBe(true);
+  });
 });
-
-

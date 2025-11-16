@@ -1,10 +1,10 @@
-import { RouteTypes } from "@/core/enums/RouteTypes.enum";
-import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
+import { RouteTypes } from '@/core/enums/RouteTypes.enum';
+import { cookies } from 'next/headers';
+import { redirect } from 'next/navigation';
 
 export default async function IndexPage() {
   const cookieStore = await cookies();
-  const session = cookieStore.get("session")?.value;
+  const session = cookieStore.get('session')?.value;
 
   if (!session) {
     redirect(RouteTypes.SIGN_IN);

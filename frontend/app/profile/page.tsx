@@ -1,5 +1,5 @@
-import { RouteTypes } from "@/core/enums/RouteTypes.enum";
-import Link from "next/link";
+import { RouteTypes } from '@/core/enums/RouteTypes.enum';
+import Link from 'next/link';
 
 export default function ProfilePage() {
   return (

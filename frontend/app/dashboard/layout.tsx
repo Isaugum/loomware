@@ -1,13 +1,9 @@
-import Sidebar from "@/components/modules/Sidebar/Sidebar";
-import Link from "next/link";
-import { RouteTypes } from "@/core/enums/RouteTypes.enum";
-import React from "react";
+import Sidebar from '@/components/modules/Sidebar/Sidebar';
+import Link from 'next/link';
+import { RouteTypes } from '@/core/enums/RouteTypes.enum';
+import React from 'react';
 
-export default function DashboardLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   return (
     <div className="min-h-screen w-full bg-gray-50 text-gray-900">
       <div className="flex w-full h-screen overflow-hidden">

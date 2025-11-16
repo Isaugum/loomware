@@ -1,0 +1,12 @@
+{
+  "name": "loomware",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "prepare": "lefthook install"
+  },
+  "devDependencies": {
+    "lefthook": "^1.10.0"
+  }
+}
+
