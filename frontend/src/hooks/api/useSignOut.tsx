@@ -1,21 +1,16 @@
 import { Endpoints } from '@/core/enums/Endpoints.enum';
 import { useRequestMutation } from '../useMutation';
-import { SignInTypes } from '@/core/types/auth/sign-in.type';
 import { redirect } from 'next/navigation';
 import { RouteTypes } from '@/core/enums/RouteTypes.enum';
 
-export default function useSignIn() {
-  const { mutateAsync, data, isLoading, isSuccess, isError } = useRequestMutation();
+export default function useSignOut() {
+  const { mutateAsync, isError } = useRequestMutation();
 
-  const signIn = async (formData: SignInTypes) => {
+  const signOut = async () => {
     await mutateAsync(
       {
-        url: Endpoints.SIGN_IN,
+        url: Endpoints.SIGN_OUT,
         method: 'POST',
-        data: formData,
-        headers: {
-          'Content-Type': 'application/json',
-        },
       },
       {
         onSuccess: () => {
@@ -29,10 +24,7 @@ export default function useSignIn() {
   };
 
   return {
-    signIn,
-    data,
-    isLoading,
-    isSuccess,
+    signOut,
     isError,
   };
 }

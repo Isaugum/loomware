@@ -1,36 +1,38 @@
 'use client';
 
+const NAV_ELEMENTS = [
+  {
+    text: 'home',
+    href: RouteTypes.DASHBOARD,
+  },
+  {
+    text: 'projects',
+    href: RouteTypes.DASHBOARD,
+  },
+  {
+    text: 'settings',
+    href: RouteTypes.DASHBOARD,
+  },
+];
+
 import Link from 'next/link';
 import { RouteTypes } from '@/core/enums/RouteTypes.enum';
 
 export default function Sidebar() {
   return (
-    <div className="flex flex-col min-w-[240px] max-w-[280px] w-[240px] h-full border-r">
-      <div className="h-14 px-4 flex items-center border-b">
-        <span className="font-semibold">Loomware</span>
-      </div>
-      <nav className="flex-1 overflow-auto p-2">
-        <ul className="space-y-1">
-          <li>
-            <Link href={RouteTypes.DASHBOARD} className="block px-3 py-2 rounded hover:bg-gray-100">
-              Home
-            </Link>
-          </li>
-          <li>
-            <Link href="#" className="block px-3 py-2 rounded hover:bg-gray-100">
-              Projects
-            </Link>
-          </li>
-          <li>
-            <Link href="#" className="block px-3 py-2 rounded hover:bg-gray-100">
-              Reports
-            </Link>
-          </li>
-          <li>
-            <Link href="#" className="block px-3 py-2 rounded hover:bg-gray-100">
-              Settings
-            </Link>
-          </li>
+    <div className="flex flex-col h-full border-r p-6 min-w-[240px]">
+      <h3 className="font-semibold text-[24px]">Loomware</h3>
+      <nav className="mt-8">
+        <ul className="text-[20px] space-y-4 px-2">
+          {NAV_ELEMENTS.map((item, index) => {
+            return (
+              <li key={`nav-${index}-${item.text}`}>
+                <Link href={item.href} className="capitalize">
+                  {item.text}
+                </Link>
+              </li>
+            );
+          })}
         </ul>
       </nav>
     </div>

@@ -31,7 +31,7 @@ export default function SigninForm() {
   });
 
   const onSubmit = async (formData: SignInTypes) => {
-    signIn(formData);
+    await signIn(formData);
   };
 
   return (

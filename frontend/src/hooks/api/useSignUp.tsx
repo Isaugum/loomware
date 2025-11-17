@@ -1,24 +1,31 @@
 import { Endpoints } from '@/core/enums/Endpoints.enum';
 import { useRequestMutation } from '../useMutation';
 import { SignUpTypes } from '@/core/types/auth/sign-up.type';
+import { redirect } from 'next/navigation';
+import { RouteTypes } from '@/core/enums/RouteTypes.enum';
 
 export default function useSignUp() {
   const { mutateAsync, data, isLoading, isSuccess, isError } = useRequestMutation();
 
   const signUp = async (formData: SignUpTypes) => {
-    try {
-      const result = await mutateAsync({
+    await mutateAsync(
+      {
         url: Endpoints.SIGN_UP,
         method: 'POST',
         data: formData,
         headers: {
           'Content-Type': 'application/json',
         },
-      });
-      console.log('Signed up!', result);
-    } catch (err) {
-      console.error('Signup failed:', err);
-    }
+      },
+      {
+        onSuccess: () => {
+          redirect(RouteTypes.DASHBOARD);
+        },
+        onError: (err: Error) => {
+          console.error(err);
+        },
+      },
+    );
   };
 
   return {
