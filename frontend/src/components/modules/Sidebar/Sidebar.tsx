@@ -5,7 +5,7 @@ import { RouteTypes } from '@/core/enums/RouteTypes.enum';
 
 export default function Sidebar() {
   return (
-    <div className="flex flex-col min-w-[240px] max-w-[280px] w-[240px] h-full border-r bg-white">
+    <div className="flex flex-col min-w-[240px] max-w-[280px] w-[240px] h-full border-r">
       <div className="h-14 px-4 flex items-center border-b">
         <span className="font-semibold">Loomware</span>
       </div>
@@ -13,7 +13,7 @@ export default function Sidebar() {
         <ul className="space-y-1">
           <li>
             <Link href={RouteTypes.DASHBOARD} className="block px-3 py-2 rounded hover:bg-gray-100">
-              Dashboard Home
+              Home
             </Link>
           </li>
           <li>

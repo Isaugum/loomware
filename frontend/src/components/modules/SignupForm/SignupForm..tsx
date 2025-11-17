@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Input from '@/components/atoms/Input/Input';
-import { signupSchema, SignUpTypes } from '@/core/types/auth/sign-up.type';
+import { signUpSchema, SignUpTypes } from '@/core/types/auth/sign-up.type';
 import useSignUp from '@/hooks/api/useSignUp';
 
 export default function SignupForm() {
@@ -15,7 +15,7 @@ export default function SignupForm() {
     handleSubmit,
     formState: { errors },
   } = useForm<SignUpTypes>({
-    resolver: zodResolver(signupSchema),
+    resolver: zodResolver(signUpSchema),
     mode: 'onTouched',
     defaultValues: { email: '', password: '' },
   });
@@ -25,7 +25,7 @@ export default function SignupForm() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center gap-4 max-w-[300px] w-full">
+    <form className="flex flex-col items-center justify-center gap-4 max-w-[300px] w-full">
       <h2 className="text-2xl font-bold">Sign up</h2>
       <Input type="email" placeholder="Email" register={register('email')} error={errors.email} />
       <Input
@@ -47,6 +47,6 @@ export default function SignupForm() {
           Sign in
         </Link>
       </p>
-    </div>
+    </form>
   );
 }

@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Input from '@/components/atoms/Input/Input';
+import useSignIn from '@/hooks/api/useSignIn';
 
 const signinSchema = z.object({
   email: z
@@ -17,6 +18,8 @@ const signinSchema = z.object({
 type SignInTypes = z.infer<typeof signinSchema>;
 
 export default function SigninForm() {
+  const { signIn } = useSignIn();
+
   const {
     register,
     handleSubmit,
@@ -27,12 +30,12 @@ export default function SigninForm() {
     defaultValues: { email: '', password: '' },
   });
 
-  const onSubmit = (data: SignInTypes) => {
-    console.log('Submitted:', data);
+  const onSubmit = async (formData: SignInTypes) => {
+    signIn(formData);
   };
 
   return (
-    <div className="flex flex-col items-center justify-center gap-4 max-w-[300px] w-full">
+    <form className="flex flex-col items-center justify-center gap-4 max-w-[300px] w-full">
       <h2 className="text-2xl font-bold">Sign in</h2>
       <Input type="email" placeholder="Email" register={register('email')} error={errors.email} />
       <Input
@@ -54,6 +57,6 @@ export default function SigninForm() {
           Sign up
         </Link>
       </p>
-    </div>
+    </form>
   );
 }
