@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
 
 export interface User {
   id: string;
@@ -14,13 +15,20 @@ interface UserState {
   updateUser: (updates: Partial<User>) => void;
 }
 
-export const useUserStore = create<UserState>((set) => ({
-  user: null,
-  isLoggedIn: false,
-  setUser: (user: User) => set({ user, isLoggedIn: true }),
-  clearUser: () => set({ user: null, isLoggedIn: false }),
-  updateUser: (updates: Partial<User>) =>
-    set((state) => ({
-      user: state.user ? { ...state.user, ...updates } : null,
-    })),
-}));
+export const useUserStore = create<UserState>()(
+  persist(
+    (set) => ({
+      user: null,
+      isLoggedIn: false,
+      setUser: (user: User) => set({ user, isLoggedIn: true }),
+      clearUser: () => set({ user: null, isLoggedIn: false }),
+      updateUser: (updates: Partial<User>) =>
+        set((state) => ({
+          user: state.user ? { ...state.user, ...updates } : null,
+        })),
+    }),
+    {
+      name: 'user',
+    },
+  ),
+);
