@@ -6,10 +6,8 @@ import { Project } from '../../projects/projects.entity';
 import { User } from '../../user/user.entity';
 
 @Module({
-  imports: [
-    TypeOrmModule.forFeature([UserProject, Project, User])
-  ],
+  imports: [TypeOrmModule.forFeature([UserProject, Project, User])],
   providers: [UserProjectsService],
-  exports: [UserProjectsService]
+  exports: [UserProjectsService],
 })
 export class UserProjectsModule {}

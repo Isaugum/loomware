@@ -106,13 +106,13 @@ export class AuthService {
     return user;
   }
 
-  startSession(
+  async startSession(
     req: Request & {
       session: Session & Partial<SessionData>;
       user?: Partial<User>;
     },
     user?: Partial<User>,
-  ): Promise<{ success: boolean }> {
+  ): Promise<{ user?: Partial<User>; success: boolean }> {
     const userId = user?.id || req.user?.id;
 
     if (!userId) {
@@ -125,9 +125,16 @@ export class AuthService {
     (
       req.session as Session & Partial<SessionData> & { userId?: string }
     ).userId = userId;
-    return Promise.resolve({
+
+    let sessionUser: Partial<User> | undefined = user;
+    if (!sessionUser) {
+      sessionUser = (await this.userService.findById(userId)) ?? undefined;
+    }
+
+    return {
+      user: sessionUser,
       success: true,
-    });
+    };
   }
 
   destroySession(session: Session & Partial<SessionData>): Promise<void> {

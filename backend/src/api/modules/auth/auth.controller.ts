@@ -2,6 +2,7 @@ import { Body, Controller, Post, Request, UseGuards } from '@nestjs/common';
 import { AuthService } from '@modules/auth/auth.service';
 import { LocalGuard } from '@common/guards/local.guard';
 import { Public } from '@common/decorators/public.decorator';
+import { User } from '../user/user.entity';
 
 @Controller('auth')
 export class AuthController {
@@ -26,7 +27,9 @@ export class AuthController {
   @Public()
   @UseGuards(LocalGuard)
   @Post('sign-in')
-  async signIn(@Request() req): Promise<{ success: boolean }> {
+  async signIn(
+    @Request() req,
+  ): Promise<{ user?: Partial<User>; success: boolean }> {
     return this.authService.startSession(req);
   }
 

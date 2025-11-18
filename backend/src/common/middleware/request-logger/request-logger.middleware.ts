@@ -6,7 +6,7 @@ import { Logger } from 'winston';
 @Injectable()
 export class RequestLoggerMiddleware implements NestMiddleware {
   constructor(
-    @Inject(WINSTON_MODULE_PROVIDER) private readonly logger: Logger
+    @Inject(WINSTON_MODULE_PROVIDER) private readonly logger: Logger,
   ) {}
 
   use(req: Request, res: Response, next: NextFunction) {
@@ -19,9 +19,9 @@ export class RequestLoggerMiddleware implements NestMiddleware {
 
       this.logger.info(
         `${method} - ${originalUrl} - ${statusCode} - ${delay}ms`,
-        { context: 'HTTP' }
-      )
-    })
+        { context: 'HTTP' },
+      );
+    });
 
     next();
   }

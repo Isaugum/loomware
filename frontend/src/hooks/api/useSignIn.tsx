@@ -3,9 +3,11 @@ import { useRequestMutation } from '../useMutation';
 import { SignInTypes } from '@/core/types/auth/sign-in.type';
 import { redirect } from 'next/navigation';
 import { RouteTypes } from '@/core/enums/RouteTypes.enum';
+import { useUserStore } from '@/state/user.state';
 
 export default function useSignIn() {
   const { mutateAsync, data, isLoading, isSuccess, isError } = useRequestMutation();
+  const { setUser } = useUserStore();
 
   const signIn = async (formData: SignInTypes) => {
     await mutateAsync(
@@ -18,7 +20,9 @@ export default function useSignIn() {
         },
       },
       {
-        onSuccess: () => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        onSuccess: (response: any) => {
+          setUser(response.user);
           redirect(RouteTypes.DASHBOARD);
         },
         onError: (err: Error) => {

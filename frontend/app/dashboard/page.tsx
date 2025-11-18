@@ -1,3 +1,4 @@
+import Dashboard from '@/components/pages/Dashboard/Dashboard';
 import { RouteTypes } from '@/core/enums/RouteTypes.enum';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
@@ -10,13 +11,5 @@ export default async function IndexPage() {
     redirect(RouteTypes.SIGN_IN);
   }
 
-  return (
-    <section>
-      <h1>WELCOME, USER</h1>
-      <div>
-        <h2>No active projects...</h2>
-        <button>New project</button>
-      </div>
-    </section>
-  );
+  return <Dashboard />;
 }

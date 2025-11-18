@@ -13,7 +13,7 @@ import { Logger } from 'winston';
 @Catch(HttpException)
 export class HttpExceptionFilter implements ExceptionFilter {
   constructor(
-    @Inject(WINSTON_MODULE_PROVIDER) public readonly logger: Logger
+    @Inject(WINSTON_MODULE_PROVIDER) public readonly logger: Logger,
   ) {}
   // constructor(private readonly logger: AppLoggerService) {}
 
