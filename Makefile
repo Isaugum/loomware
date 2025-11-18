@@ -107,6 +107,10 @@ ifndef NAME
 endif
 	docker exec -i $(BACKEND_CONTAINER) npx nest g service $(NAME)
 
+backend-install:
+	cd backend && npm install ${PACKAGES}
+	-@docker exec -i $(BACKEND_CONTAINER)
+
 # ================================
 # Frontend commands
 # ================================
@@ -118,6 +122,7 @@ frontend-dev:
 
 frontend-install:
 	cd frontend && npm install ${PACKAGES}
+	-@docker exec -i $(FRONTEND_CONTAINER) npm install ${PACKAGES}
 
 # --- Frontend scaffolding via Plop ---
 .PHONY: frontend-gen-component frontend-gen-page frontend-gen-layout

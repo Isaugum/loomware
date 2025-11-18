@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useForm } from 'react-hook-form';
+import { FieldError, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Input from '@/components/atoms/Input/Input';
 import { signUpSchema, SignUpTypes } from '@/core/types/auth/sign-up.type';
@@ -27,12 +27,24 @@ export default function SignupForm() {
   return (
     <form className="flex flex-col items-center justify-center gap-4 max-w-[300px] w-full">
       <h2 className="text-2xl font-bold">Sign up</h2>
+      <Input
+        type="text"
+        placeholder="Username"
+        register={register('username')}
+        error={errors.username}
+      />
       <Input type="email" placeholder="Email" register={register('email')} error={errors.email} />
       <Input
         type="password"
         placeholder="Password"
         register={register('password')}
         error={errors.password}
+      />
+      <Input
+        type="password"
+        placeholder="Confirm password"
+        register={register('confirmPassword')}
+        error={errors.confirmPassword as FieldError | undefined}
       />
       <button
         type="submit"

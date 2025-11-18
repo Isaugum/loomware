@@ -22,11 +22,12 @@ export class AuthService {
   ) {}
 
   async signUp(
+    username: string,
     email: string,
     password: string,
     req: Request & { session: Session & Partial<SessionData> },
   ): Promise<{ success: boolean } | undefined> {
-    if (!email || !password) {
+    if (!username || !email || !password) {
       this.logger.error('Email and password are required.');
       throw new BadRequestException('Email and password are required.');
     }
@@ -52,7 +53,11 @@ export class AuthService {
 
     try {
       const passwordHash = await this.encryptionService.hashPassword(password);
-      const user = await this.userService.createUser(email, passwordHash);
+      const user = await this.userService.createUser(
+        username,
+        email,
+        passwordHash,
+      );
 
       if (user) {
         this.logger.info('Succesfully created user', {

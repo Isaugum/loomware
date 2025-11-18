@@ -32,8 +32,12 @@ export class UserService {
     return user;
   }
 
-  async createUser(email: string, password: string): Promise<Partial<User>> {
-    const newUser = this.userRepository.create({ email, password });
+  async createUser(
+    username: string,
+    email: string,
+    password: string,
+  ): Promise<Partial<User>> {
+    const newUser = this.userRepository.create({ username, email, password });
     try {
       const savedUser = await this.userRepository.save(newUser);
 

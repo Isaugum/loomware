@@ -7,7 +7,7 @@ const NAV_ELEMENTS = [
   },
   {
     text: 'projects',
-    href: RouteTypes.DASHBOARD,
+    href: RouteTypes.PROJECTS,
   },
   {
     text: 'settings',

@@ -52,7 +52,7 @@ export default function SigninForm() {
         Sign in
       </button>
       <p className="text-sm text-gray-500">
-        Dont have an account?
+        Dont have an account?{' '}
         <Link href="/sign-up" className="text-blue-500">
           Sign up
         </Link>

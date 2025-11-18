@@ -17,7 +17,7 @@ export default function Input({
   error,
 }: InputProps) {
   return (
-    <>
+    <div className="w-full">
       <input
         type={type}
         placeholder={placeholder}
@@ -25,6 +25,6 @@ export default function Input({
         {...register}
       />
       <Error error={error} />
-    </>
+    </div>
   );
 }

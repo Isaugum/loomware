@@ -10,10 +10,15 @@ export class AuthController {
   @Public()
   @Post('sign-up')
   async signUp(
-    @Body() body: { email: string; password: string },
+    @Body() body: { username: string; email: string; password: string },
     @Request() req,
   ) {
-    return this.authService.signUp(body.email, body.password, req);
+    return this.authService.signUp(
+      body.username,
+      body.email,
+      body.password,
+      req,
+    );
   }
 
   ////////////////////////////////////////////////////
